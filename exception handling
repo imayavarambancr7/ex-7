@@ -1,0 +1,90 @@
+import java.util.Scanner;
+
+public class ConstructID {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user for their full name and street address
+        System.out.print("Enter your full name: ");
+        String fullName = scanner.nextLine();
+        System.out.print("Enter your street address: ");
+        String address = scanner.nextLine();
+
+        // Construct the ID from initials and numeric part of the address
+        String id = constructID(fullName, address);
+
+        // Display the resulting ID
+        System.out.println("Your ID is: " + id);
+
+        scanner.close();
+    }
+
+    public static String constructID(String fullName, String address) {
+        // Split the full name into initials
+        String[] nameParts = fullName.split(" ");
+        StringBuilder initials = new StringBuilder();
+
+        for (String namePart : nameParts) {
+            if (!namePart.isEmpty()) {
+                initials.append(namePart.charAt(0));
+            }
+        }
+
+        // Extract the numeric part of the address
+        String numericPart = address.replaceAll("\\D", "");
+
+        // Construct the ID by combining initials and numeric part
+        String id = initials.toString() + numericPart;
+
+        return id;
+    }
+}
+/*
+import java.util.Scanner;
+
+public class SimpleEncryption {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user to enter a message to encrypt
+        System.out.print("Enter a message to encrypt: ");
+        String originalMessage = scanner.nextLine();
+
+        // Prompt the user to enter the encryption key (number of positions to shift)
+        System.out.print("Enter the encryption key (a positive integer): ");
+        int encryptionKey = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        // Encrypt the message and display the encrypted message
+        String encryptedMessage = encrypt(originalMessage, encryptionKey);
+        System.out.println("Encrypted message: " + encryptedMessage);
+
+        // Decrypt the encrypted message and display the original message
+        String decryptedMessage = decrypt(encryptedMessage, encryptionKey);
+        System.out.println("Decrypted message: " + decryptedMessage);
+
+        scanner.close();
+    }
+
+    public static String encrypt(String message, int shift) {
+        StringBuilder encrypted = new StringBuilder();
+
+        for (char c : message.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                char encryptedChar = (char) (base + (c - base + shift) % 26);
+                encrypted.append(encryptedChar);
+            } else {
+                encrypted.append(c); // Keep spaces and punctuation unchanged
+            }
+        }
+
+        return encrypted.toString();
+    }
+
+    public static String decrypt(String encryptedMessage, int shift) {
+        // Decryption is the same as encryption, but with a negative shift
+        return encrypt(encryptedMessage, -shift);
+    }
+}
+*/
